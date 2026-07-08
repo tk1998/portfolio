@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tejas Kadam — Lead Engineer</title>
+<style>
+  :root{
+    --ink:#111827;
+    --ink-soft:#4B5563;
+    --line:#E5E7EB;
+    --paper:#FFFFFF;
+    --paper-alt:#F8FAFC;
+    --blue:#2563EB;
+    --blue-dark:#1D4ED8;
+    --tag-bg:#EFF3FE;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--blue); text-decoration:none; }
+  .container{ max-width:960px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:960px; margin:0 auto; padding:16px 24px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .nav-name{ font-weight:700; font-size:15px; }
+  .nav-links{ display:flex; gap:26px; list-style:none; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); font-weight:500; }
+  .nav-links a:hover{ color:var(--blue); }
+  .nav-cta{
+    background:var(--ink); color:#fff; padding:9px 18px; border-radius:6px;
+    font-size:14px; font-weight:600;
+  }
+  .nav-cta:hover{ background:var(--blue-dark); color:#fff; }
+  @media (max-width:700px){ .nav-links{ display:none; } }
+
+  /* HERO */
+  .hero{ padding:72px 0 56px; }
+  .eyebrow{
+    font-size:13px; font-weight:600; color:var(--blue);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px;
+  }
+  h1{
+    font-size:clamp(32px, 5vw, 48px);
+    font-weight:800;
+    line-height:1.15;
+    margin-bottom:16px;
+    max-width:680px;
+  }
+  .hero-sub{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:620px;
+    margin-bottom:32px;
+  }
+  .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:44px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:8px; font-weight:600; font-size:14.5px;
+  }
+  .btn-primary{ background:var(--blue); color:#fff; }
+  .btn-primary:hover{ background:var(--blue-dark); color:#fff; }
+  .btn-secondary{ background:var(--paper-alt); color:var(--ink); border:1px solid var(--line); }
+  .btn-secondary:hover{ border-color:var(--blue); color:var(--blue); }
+
+  /* STATS BAR */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  @media (max-width:700px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+  .stat{
+    padding:24px 20px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .stat:nth-child(4){ border-right:none; }
+  @media (max-width:700px){
+    .stat:nth-child(2n){ border-right:none; }
+    .stat:nth-child(3), .stat:nth-child(4){ border-bottom:none; }
+  }
+  @media (min-width:701px){ .stat{ border-bottom:none; } }
+  .stat-num{ font-size:28px; font-weight:800; color:var(--blue); margin-bottom:4px; }
+  .stat-label{ font-size:13px; color:var(--ink-soft); }
+
+  /* SECTION SCAFFOLD */
+  section{ padding:64px 0; border-top:1px solid var(--line); }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom:36px; flex-wrap:wrap; gap:10px;
+  }
+  h2{ font-size:26px; font-weight:800; }
+  .section-note{ font-size:14px; color:var(--ink-soft); }
+
+  /* SUMMARY */
+  .summary-text{ font-size:17px; color:var(--ink-soft); max-width:760px; }
+  .summary-text strong{ color:var(--ink); font-weight:600; }
+
+  /* EXPERIENCE */
+  .job{ margin-bottom:48px; }
+  .job:last-child{ margin-bottom:0; }
+  .job-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:6px; margin-bottom:4px;
+  }
+  .job-title{ font-size:19px; font-weight:700; }
+  .job-dates{
+    font-size:13px; font-weight:600; color:var(--blue);
+    background:var(--tag-bg); padding:4px 10px; border-radius:5px; white-space:nowrap;
+  }
+  .job-org{ font-size:14.5px; color:var(--ink-soft); margin-bottom:16px; }
+  .job ul{ list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .job li{
+    position:relative; padding-left:18px; font-size:15px; color:var(--ink-soft);
+  }
+  .job li::before{
+    content:''; position:absolute; left:0; top:9px;
+    width:5px; height:5px; border-radius:50%; background:var(--blue);
+  }
+  .job li strong{ color:var(--ink); font-weight:600; }
+
+  /* SKILLS */
+  .skills-cols{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px 40px; }
+  @media (max-width:700px){ .skills-cols{ grid-template-columns:1fr; } }
+  .skill-cat{ margin-bottom:6px; }
+  .skill-cat-name{ font-size:14px; font-weight:700; margin-bottom:10px; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    background:var(--tag-bg); color:var(--blue-dark);
+    font-size:13px; font-weight:600; padding:6px 12px; border-radius:16px;
+  }
+
+  /* CERTS */
+  .certs{ display:flex; gap:20px; flex-wrap:wrap; }
+  .cert-card{
+    flex:1; min-width:240px;
+    border:1px solid var(--line); border-radius:10px; padding:20px 22px;
+  }
+  .cert-name{ font-weight:700; font-size:15.5px; margin-bottom:4px; }
+  .cert-meta{ font-size:13px; color:var(--ink-soft); }
+
+  /* EDUCATION */
+  .edu-item{ display:flex; justify-content:space-between; gap:16px; padding:16px 0; }
+  .edu-item + .edu-item{ border-top:1px solid var(--line); }
+  .edu-degree{ font-weight:700; font-size:15.5px; }
+  .edu-school{ font-size:14px; color:var(--ink-soft); margin-top:2px; }
+  .edu-dates{ font-size:13px; color:var(--ink-soft); white-space:nowrap; }
+
+  /* FOOTER / CONTACT */
+  footer{ padding:64px 0 48px; background:var(--paper-alt); border-top:1px solid var(--line); }
+  .footer-title{ font-size:28px; font-weight:800; margin-bottom:10px; }
+  .footer-sub{ color:var(--ink-soft); margin-bottom:28px; max-width:520px; }
+  .contact-row{ display:flex; flex-wrap:wrap; gap:14px; }
+  .contact-pill{
+    display:flex; align-items:center; gap:8px;
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:10px 16px; font-size:14px; font-weight:600; color:var(--ink);
+  }
+  .contact-pill:hover{ border-color:var(--blue); color:var(--blue); }
+  .footer-bottom{ margin-top:44px; font-size:13px; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-name">Tejas Kadam</div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;">
+    <div class="eyebrow">Lead Engineer · Mumbai, India</div>
+    <h1>I build and run large-scale Azure and AWS infrastructure that stays up.</h1>
+    <p class="hero-sub">
+      Lead Engineer with 6 years of experience designing, automating, and managing enterprise cloud
+      environments — Terraform, Ansible, SALT Stack, and CI/CD, applied to keep production systems
+      reliable and costs under control.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://www.linkedin.com/in/tejas-kadam-394b91176/" target="_blank" rel="noopener">View LinkedIn</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">6 yrs</div>
+        <div class="stat-label">Cloud infrastructure experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">99.9%+</div>
+        <div class="stat-label">Uptime maintained in production</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">60%</div>
+        <div class="stat-label">Faster provisioning via Terraform modules</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2×</div>
+        <div class="stat-label">Microsoft Azure certifications</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="summary">
+    <div class="section-head"><h2>Summary</h2></div>
+    <p class="summary-text">
+      <strong>Lead Engineer with 6 years of progressive experience</strong> designing, deploying, and managing
+      enterprise-scale cloud infrastructure on Microsoft Azure and AWS. Hands-on expertise in infrastructure-as-code
+      (Terraform), configuration management (Ansible, SALT Stack), scripting (Python, Bash, PowerShell), and
+      CI/CD pipelines. Proven ability to drive cost optimization, automate operational workflows, and lead
+      complex migration projects across RHEL and multi-cloud environments. Consistently delivers reliable,
+      secure, and high-availability cloud solutions aligned with business objectives.
+    </p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-head">
+      <h2>Experience</h2>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title">Lead Engineer</div>
+        <div class="job-dates">Nov 2024 — Present</div>
+      </div>
+      <div class="job-org">CitiusTech Healthcare Technology Private Limited · Mumbai, India</div>
+      <ul>
+        <li>Architect and deliver scalable Azure cloud solutions, improving <strong>platform performance and cost efficiency</strong> across healthcare infrastructure.</li>
+        <li>Manage a large-scale Azure environment with Terraform, Azure DevOps, and SALT Stack, maintaining <strong>99.9%+ uptime</strong> across production workloads.</li>
+        <li>Build Power BI dashboards from Azure Monitor, Log Analytics, and CSV/Excel sources for centralized KPI reporting to senior leadership.</li>
+        <li>Lead RHEL and SALT Stack migration projects across teams with <strong>near-zero downtime</strong>.</li>
+        <li>Develop reusable Terraform modules, standardizing deployments and cutting provisioning time by an estimated <strong>60%</strong>.</li>
+        <li>Troubleshoot complex incidents across Azure, Active Directory, DNS, and RHEL, reducing mean time to resolution.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title">Senior Cloud Engineer</div>
+        <div class="job-dates">Jul 2023 — Oct 2024</div>
+      </div>
+      <div class="job-org">E-Zest Solutions · Pune, India</div>
+      <ul>
+        <li>Designed and managed secure, scalable Azure and AWS infrastructure across <strong>multiple client environments</strong> simultaneously.</li>
+        <li>Automated infrastructure provisioning with Terraform for consistent deployments across dev, staging, and production.</li>
+        <li>Automated Power BI data-refresh workflows, keeping reporting consistent for operations and leadership teams.</li>
+        <li>Used Python, PowerShell, and Bash to automate routine operations, cutting manual workload significantly.</li>
+        <li>Ensured high availability and disaster-recovery readiness through robust architecture design and regular DR testing.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title">Cloud Engineer</div>
+        <div class="job-dates">Jan 2020 — Jul 2023</div>
+      </div>
+      <div class="job-org">Larsen &amp; Toubro Infotech (LTIMindtree) · Mumbai, India</div>
+      <ul>
+        <li>Managed Azure and AWS infrastructure and multi-OS environments (Windows, Linux/RHEL) for enterprise clients.</li>
+        <li>Provided L2 support for cloud and OS issues, maintaining SLAs and authoring SOPs that reduced recurring incidents.</li>
+        <li>Delivered PowerShell and Shell automation, cutting manual effort across the Linux team.</li>
+        <li>Led resource migration and DR activities, defining automation requirements with cross-functional teams.</li>
+        <li>Managed Linux team members' tasks and workload, supporting productivity and knowledge sharing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-head"><h2>Skills</h2></div>
+    <div class="skills-cols">
+      <div class="skill-cat">
+        <div class="skill-cat-name">Cloud Platforms</div>
+        <div class="tag-row">
+          <span class="tag">Azure IaaS</span><span class="tag">Azure PaaS</span>
+          <span class="tag">AWS</span><span class="tag">Networking</span><span class="tag">Security</span><span class="tag">Monitoring</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-name">AWS for DevOps &amp; SRE</div>
+        <div class="tag-row">
+          <span class="tag">EC2</span><span class="tag">S3</span><span class="tag">IAM</span>
+          <span class="tag">VPC</span><span class="tag">CloudWatch</span><span class="tag">CloudFormation</span>
+          <span class="tag">Lambda</span><span class="tag">ECS</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-name">Infrastructure as Code</div>
+        <div class="tag-row">
+          <span class="tag">Terraform</span><span class="tag">ARM Templates</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-name">Configuration Management</div>
+        <div class="tag-row">
+          <span class="tag">Ansible</span><span class="tag">SALT Stack</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-name">Scripting &amp; Programming</div>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Bash</span><span class="tag">PowerShell</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-name">CI/CD &amp; DevOps</div>
+        <div class="tag-row">
+          <span class="tag">Jenkins</span><span class="tag">Azure DevOps</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-name">Monitoring &amp; Observability</div>
+        <div class="tag-row">
+          <span class="tag">Azure Monitor</span><span class="tag">Log Analytics</span><span class="tag">App Insights</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-name">Reporting &amp; Analytics</div>
+        <div class="tag-row">
+          <span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">Excel</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-name">Operating Systems &amp; VCS</div>
+        <div class="tag-row">
+          <span class="tag">RHEL / Linux</span><span class="tag">Windows Server</span><span class="tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-head"><h2>Certifications</h2></div>
+    <div class="certs">
+      <div class="cert-card">
+        <div class="cert-name">Microsoft Certified: Azure Administrator Associate</div>
+        <div class="cert-meta">AZ-104 · Issued Oct 2022</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-name">Microsoft Certified: Azure Fundamentals</div>
+        <div class="cert-meta">AZ-900 · Issued Jul 2022</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-head"><h2>Education</h2></div>
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">Master of Science in Computer Science</div>
+        <div class="edu-school">R.D. National College, Mumbai · GPA 7.5/10</div>
+      </div>
+      <div class="edu-dates">Aug 2019 — Jun 2021</div>
+    </div>
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">Bachelor of Science in Computer Science</div>
+        <div class="edu-school">R.D. National College, Mumbai · GPA 8.0/10</div>
+      </div>
+      <div class="edu-dates">Aug 2016 — Jun 2019</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-title">Let's talk.</div>
+    <p class="footer-sub">Open to DevOps, Site Reliability Engineer and Azure architecture roles. Happy to walk through any of the projects above in more detail.</p>
+    <div class="contact-row">
+      <span class="contact-pill">tejaskadam802@gmail.com</span>
+      <span class="contact-pill">+91-8451953153</span>
+      <a class="contact-pill" href="https://www.linkedin.com/in/tejas-kadam-394b91176/" target="_blank" rel="noopener">LinkedIn Profile</a>
+      <span class="contact-pill">Mumbai, Maharashtra, India</span>
+    </div>
+    <div class="footer-bottom">© 2026 Tejas Kadam</div>
+  </div>
+</footer>
+
+</body>
+</html>
