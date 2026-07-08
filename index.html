@@ -140,6 +140,116 @@
   }
   .job li strong{ color:var(--ink); font-weight:600; }
 
+  /* EXPERIENCE — TIMELINE */
+  .exp-timeline{ position:relative; }
+  .exp-item{
+    position:relative; padding-left:58px; padding-bottom:40px;
+    opacity:0; transform:translateY(18px);
+    transition:opacity .55s ease, transform .55s ease;
+  }
+  .exp-item.in-view{ opacity:1; transform:translateY(0); }
+  .exp-item:last-child{ padding-bottom:0; }
+  .exp-rail{
+    position:absolute; left:15px; top:8px; bottom:-32px; width:2px;
+    background:var(--line);
+  }
+  .exp-item:last-child .exp-rail{ display:none; }
+  .exp-node{
+    position:absolute; left:0; top:2px; width:32px; height:32px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800; letter-spacing:.02em; color:#fff;
+    background:var(--ink-soft); box-shadow:0 0 0 4px var(--paper);
+  }
+  .exp-item.current .exp-node{
+    background:var(--blue);
+    box-shadow:0 0 0 4px var(--paper), 0 0 0 8px rgba(37,99,235,0.14);
+  }
+  .exp-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:14px;
+    padding:24px 26px 22px;
+    transition:box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+  }
+  .exp-card:hover{
+    box-shadow:0 10px 28px rgba(17,24,39,0.08); transform:translateY(-3px);
+    border-color:#D7E0F5;
+  }
+  .exp-item.current .exp-card{
+    border-color:#C7D7FB;
+    background:linear-gradient(180deg, #F6F9FF 0%, #FFFFFF 55%);
+  }
+  .exp-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:8px; margin-bottom:3px;
+  }
+  .exp-title-wrap{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .exp-title{ font-size:18.5px; font-weight:700; }
+  .current-badge{
+    font-size:10px; font-weight:700; color:#fff; background:var(--blue);
+    padding:3px 9px; border-radius:20px; text-transform:uppercase; letter-spacing:.05em;
+  }
+  .exp-org-row{ font-size:14px; color:var(--ink-soft); margin-bottom:18px; }
+  .exp-org-row b{ color:var(--ink); font-weight:600; }
+  .impact-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
+  .impact-chip{
+    display:flex; align-items:baseline; gap:6px; background:var(--tag-bg);
+    border-radius:8px; padding:8px 12px;
+  }
+  .impact-chip b{ font-size:14.5px; font-weight:800; color:var(--blue-dark); white-space:nowrap; }
+  .impact-chip span{ font-size:12px; color:var(--ink-soft); font-weight:500; }
+  .exp-highlights{ list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:4px; }
+  .exp-highlights li{
+    position:relative; padding-left:18px; font-size:15px; color:var(--ink-soft);
+  }
+  .exp-highlights li::before{
+    content:''; position:absolute; left:0; top:9px;
+    width:5px; height:5px; border-radius:50%; background:var(--blue);
+  }
+  .exp-highlights li strong{ color:var(--ink); font-weight:600; }
+
+  .exp-details{ margin-top:6px; }
+  .exp-details summary{
+    display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+    list-style:none; font-size:13.5px; font-weight:600; color:var(--blue);
+    padding:4px 0; user-select:none;
+  }
+  .exp-details summary::-webkit-details-marker{ display:none; }
+  .exp-details summary::after{
+    content:''; width:7px; height:7px; border-right:2px solid var(--blue);
+    border-bottom:2px solid var(--blue); transform:rotate(45deg);
+    transition:transform .2s ease; margin-top:-3px;
+  }
+  .exp-details[open] summary::after{ transform:rotate(-135deg); margin-top:2px; }
+  .exp-details summary:hover{ color:var(--blue-dark); }
+  .exp-details summary:hover::after{ border-color:var(--blue-dark); }
+  .exp-details ul{
+    list-style:none; display:flex; flex-direction:column; gap:9px;
+    margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
+  }
+  .exp-details li{
+    position:relative; padding-left:18px; font-size:15px; color:var(--ink-soft);
+  }
+  .exp-details li::before{
+    content:''; position:absolute; left:0; top:9px;
+    width:5px; height:5px; border-radius:50%; background:var(--line);
+    border:1px solid var(--ink-soft);
+  }
+  .exp-details li strong{ color:var(--ink); font-weight:600; }
+
+  .exp-stack{
+    display:flex; flex-wrap:wrap; gap:6px; margin-top:18px; padding-top:16px;
+    border-top:1px dashed var(--line);
+  }
+  .exp-stack .tag{ font-size:12px; padding:4px 10px; font-weight:600; }
+  @media (max-width:600px){
+    .exp-item{ padding-left:44px; }
+    .exp-node{ width:26px; height:26px; font-size:9.5px; }
+    .exp-rail{ left:12px; }
+    .exp-card{ padding:20px 18px; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .exp-item{ opacity:1 !important; transform:none !important; transition:none !important; }
+  }
+
   /* SKILLS */
   .skills-cols{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px 40px; }
   @media (max-width:700px){ .skills-cols{ grid-template-columns:1fr; } }
@@ -243,50 +353,130 @@
       <h2>Experience</h2>
     </div>
 
-    <div class="job">
-      <div class="job-head">
-        <div class="job-title">Lead Engineer</div>
-        <div class="job-dates">Nov 2024 — Present</div>
-      </div>
-      <div class="job-org">CitiusTech Healthcare Technology Private Limited · Mumbai, India</div>
-      <ul>
-        <li>Architect and deliver scalable Azure cloud solutions, improving <strong>platform performance and cost efficiency</strong> across healthcare infrastructure.</li>
-        <li>Manage a large-scale Azure environment with Terraform, Azure DevOps, and SALT Stack, maintaining <strong>99.9%+ uptime</strong> across production workloads.</li>
-        <li>Build Power BI dashboards from Azure Monitor, Log Analytics, and CSV/Excel sources for centralized KPI reporting to senior leadership.</li>
-        <li>Lead RHEL and SALT Stack migration projects across teams with <strong>near-zero downtime</strong>.</li>
-        <li>Develop reusable Terraform modules, standardizing deployments and cutting provisioning time by an estimated <strong>60%</strong>.</li>
-        <li>Troubleshoot complex incidents across Azure, Active Directory, DNS, and RHEL, reducing mean time to resolution.</li>
-      </ul>
-    </div>
+    <div class="exp-timeline">
 
-    <div class="job">
-      <div class="job-head">
-        <div class="job-title">Senior Cloud Engineer</div>
-        <div class="job-dates">Jul 2023 — Oct 2024</div>
-      </div>
-      <div class="job-org">E-Zest Solutions · Pune, India</div>
-      <ul>
-        <li>Designed and managed secure, scalable Azure and AWS infrastructure across <strong>multiple client environments</strong> simultaneously.</li>
-        <li>Automated infrastructure provisioning with Terraform for consistent deployments across dev, staging, and production.</li>
-        <li>Automated Power BI data-refresh workflows, keeping reporting consistent for operations and leadership teams.</li>
-        <li>Used Python, PowerShell, and Bash to automate routine operations, cutting manual workload significantly.</li>
-        <li>Ensured high availability and disaster-recovery readiness through robust architecture design and regular DR testing.</li>
-      </ul>
-    </div>
+      <!-- Lead Engineer — current -->
+      <div class="exp-item current">
+        <div class="exp-rail"></div>
+        <div class="exp-node">CT</div>
+        <div class="exp-card">
+          <div class="exp-top">
+            <div class="exp-title-wrap">
+              <div class="exp-title">Lead Engineer</div>
+              <span class="current-badge">Current</span>
+            </div>
+            <div class="job-dates">Nov 2024 — Present</div>
+          </div>
+          <div class="exp-org-row"><b>CitiusTech Healthcare Technology Private Limited</b> · Mumbai, India</div>
 
-    <div class="job">
-      <div class="job-head">
-        <div class="job-title">Cloud Engineer</div>
-        <div class="job-dates">Jan 2020 — Jul 2023</div>
+          <div class="impact-row">
+            <div class="impact-chip"><b>99.9%+</b><span>production uptime maintained</span></div>
+            <div class="impact-chip"><b>60% faster</b><span>provisioning via Terraform modules</span></div>
+            <div class="impact-chip"><b>Zero-downtime</b><span>RHEL &amp; SALT Stack migrations</span></div>
+          </div>
+
+          <ul class="exp-highlights">
+            <li>Architect and deliver scalable Azure cloud solutions, improving <strong>platform performance and cost efficiency</strong> across healthcare infrastructure.</li>
+            <li>Manage a large-scale Azure environment with Terraform, Azure DevOps, and SALT Stack, maintaining <strong>99.9%+ uptime</strong> across production workloads.</li>
+          </ul>
+
+          <details class="exp-details">
+            <summary>Show full details</summary>
+            <ul>
+              <li>Build Power BI dashboards from Azure Monitor, Log Analytics, and CSV/Excel sources for centralized KPI reporting to senior leadership.</li>
+              <li>Lead RHEL and SALT Stack migration projects across teams with <strong>near-zero downtime</strong>.</li>
+              <li>Develop reusable Terraform modules, standardizing deployments and cutting provisioning time by an estimated <strong>60%</strong>.</li>
+              <li>Troubleshoot complex incidents across Azure, Active Directory, DNS, and RHEL, reducing mean time to resolution.</li>
+            </ul>
+          </details>
+
+          <div class="exp-stack">
+            <span class="tag">Azure</span><span class="tag">Terraform</span><span class="tag">Azure DevOps</span>
+            <span class="tag">SALT Stack</span><span class="tag">Power BI</span><span class="tag">RHEL</span>
+          </div>
+        </div>
       </div>
-      <div class="job-org">Larsen &amp; Toubro Infotech (LTIMindtree) · Mumbai, India</div>
-      <ul>
-        <li>Managed Azure and AWS infrastructure and multi-OS environments (Windows, Linux/RHEL) for enterprise clients.</li>
-        <li>Provided L2 support for cloud and OS issues, maintaining SLAs and authoring SOPs that reduced recurring incidents.</li>
-        <li>Delivered PowerShell and Shell automation, cutting manual effort across the Linux team.</li>
-        <li>Led resource migration and DR activities, defining automation requirements with cross-functional teams.</li>
-        <li>Managed Linux team members' tasks and workload, supporting productivity and knowledge sharing.</li>
-      </ul>
+
+      <!-- Senior Cloud Engineer -->
+      <div class="exp-item">
+        <div class="exp-rail"></div>
+        <div class="exp-node">EZ</div>
+        <div class="exp-card">
+          <div class="exp-top">
+            <div class="exp-title-wrap">
+              <div class="exp-title">Senior Cloud Engineer</div>
+            </div>
+            <div class="job-dates">Jul 2023 — Oct 2024</div>
+          </div>
+          <div class="exp-org-row"><b>E-Zest Solutions</b> · Pune, India</div>
+
+          <div class="impact-row">
+            <div class="impact-chip"><b>Multi-client</b><span>Azure &amp; AWS environments run concurrently</span></div>
+            <div class="impact-chip"><b>DR-tested</b><span>disaster-recovery readiness across builds</span></div>
+            <div class="impact-chip"><b>Automated</b><span>Power BI refresh &amp; scripted ops workflows</span></div>
+          </div>
+
+          <ul class="exp-highlights">
+            <li>Designed and managed secure, scalable Azure and AWS infrastructure across <strong>multiple client environments</strong> simultaneously.</li>
+            <li>Automated infrastructure provisioning with Terraform for consistent deployments across dev, staging, and production.</li>
+          </ul>
+
+          <details class="exp-details">
+            <summary>Show full details</summary>
+            <ul>
+              <li>Automated Power BI data-refresh workflows, keeping reporting consistent for operations and leadership teams.</li>
+              <li>Used Python, PowerShell, and Bash to automate routine operations, cutting manual workload significantly.</li>
+              <li>Ensured high availability and disaster-recovery readiness through robust architecture design and regular DR testing.</li>
+            </ul>
+          </details>
+
+          <div class="exp-stack">
+            <span class="tag">Azure</span><span class="tag">AWS</span><span class="tag">Terraform</span>
+            <span class="tag">Python</span><span class="tag">PowerShell</span><span class="tag">Bash</span><span class="tag">Power BI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud Engineer -->
+      <div class="exp-item">
+        <div class="exp-rail"></div>
+        <div class="exp-node">LM</div>
+        <div class="exp-card">
+          <div class="exp-top">
+            <div class="exp-title-wrap">
+              <div class="exp-title">Cloud Engineer</div>
+            </div>
+            <div class="job-dates">Jan 2020 — Jul 2023</div>
+          </div>
+          <div class="exp-org-row"><b>Larsen &amp; Toubro Infotech (LTIMindtree)</b> · Mumbai, India</div>
+
+          <div class="impact-row">
+            <div class="impact-chip"><b>L2 support</b><span>SLA-driven incident response &amp; SOPs</span></div>
+            <div class="impact-chip"><b>Cross-functional</b><span>DR &amp; migration automation planning</span></div>
+            <div class="impact-chip"><b>Team lead</b><span>Linux team workload &amp; mentoring</span></div>
+          </div>
+
+          <ul class="exp-highlights">
+            <li>Managed Azure and AWS infrastructure and multi-OS environments (Windows, Linux/RHEL) for enterprise clients.</li>
+            <li>Provided L2 support for cloud and OS issues, maintaining SLAs and authoring SOPs that reduced recurring incidents.</li>
+          </ul>
+
+          <details class="exp-details">
+            <summary>Show full details</summary>
+            <ul>
+              <li>Delivered PowerShell and Shell automation, cutting manual effort across the Linux team.</li>
+              <li>Led resource migration and DR activities, defining automation requirements with cross-functional teams.</li>
+              <li>Managed Linux team members' tasks and workload, supporting productivity and knowledge sharing.</li>
+            </ul>
+          </details>
+
+          <div class="exp-stack">
+            <span class="tag">Azure</span><span class="tag">AWS</span><span class="tag">PowerShell</span>
+            <span class="tag">Shell</span><span class="tag">RHEL / Linux</span><span class="tag">Windows Server</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -297,7 +487,8 @@
       <div class="skill-cat">
         <div class="skill-cat-name">Cloud Platforms</div>
         <div class="tag-row">
-          <span class="tag">Azure</span><span class="tag">AWS</span>
+          <span class="tag">Azure IaaS</span><span class="tag">Azure PaaS</span>
+          <span class="tag">AWS</span><span class="tag">Networking</span><span class="tag">Security</span><span class="tag">Monitoring</span>
         </div>
       </div>
       <div class="skill-cat">
@@ -341,7 +532,7 @@
       <div class="skill-cat">
         <div class="skill-cat-name">Reporting &amp; Analytics</div>
         <div class="tag-row">
-          <span class="tag">Power BI</span><span class="tag">Excel</span>
+          <span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">Excel</span>
         </div>
       </div>
       <div class="skill-cat">
@@ -404,5 +595,26 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    var items = document.querySelectorAll('.exp-item');
+    if(!items.length) return;
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(el){ el.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry, idx){
+        if(entry.isIntersecting){
+          var el = entry.target;
+          var delay = Array.prototype.indexOf.call(items, el) * 90;
+          setTimeout(function(){ el.classList.add('in-view'); }, delay);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function(el){ io.observe(el); });
+  })();
+</script>
 </body>
 </html>
